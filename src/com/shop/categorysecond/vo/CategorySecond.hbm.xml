@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.shop.categorysecond.vo.CategorySecond" table="categorysecond" schema="db_onlineshop">
+        <id name="csid">
+            <column name="csid" sql-type="int(11)"/>
+            <generator class="native"/>
+        </id>
+        <property name="csname">
+            <column name="csname" sql-type="varchar(255)" not-null="true"/>
+        </property>
+
+        <!-- 与 Category 是双向一对多关系 -->
+        <many-to-one name="category" class="com.shop.category.vo.Category" column="cid"/>
+
+        <!-- 二级分类与商品的关系 -->
+        <set name="products">
+            <key column="csid"/>
+            <one-to-many class="com.shop.product.vo.Product"/>
+        </set>
+    </class>
+</hibernate-mapping>

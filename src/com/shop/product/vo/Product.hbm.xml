@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.shop.product.vo.Product" table="product" schema="db_onlineshop">
+        <id name="pid">
+            <column name="pid" sql-type="int(11)"/>
+            <generator class="native"/>
+        </id>
+        <property name="pname">
+            <column name="pname" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="marketPrice">
+            <column name="market_price" sql-type="double" precision="-1" not-null="true"/>
+        </property>
+        <property name="shopPrice">
+            <column name="shop_price" sql-type="double" precision="-1" not-null="true"/>
+        </property>
+        <property name="image">
+            <column name="image" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="pdesc">
+            <column name="pdesc" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="isHot">
+            <column name="is_hot" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="pdate">
+            <column name="pdate" sql-type="datetime" not-null="true"/>
+        </property>
+        <!-- 商品与二级分类是双向一对多关系 -->
+        <many-to-one name="categorySecond" class="com.shop.categorysecond.vo.CategorySecond" column="csid"/>
+    </class>
+</hibernate-mapping>
